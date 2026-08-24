@@ -1,0 +1,73 @@
+{
+  "schema": "ase-deliver/v1",
+  "name": "hero",
+  "kind": "character",
+  "view": "side",
+  "description": "side-view chibi hero in a blue tunic, brown hair, red cape, longsword, facing right",
+  "canvas": {
+    "width": 48,
+    "height": 48
+  },
+  "colorMode": "indexed",
+  "palette": [
+    "#141020",
+    "#ffffff",
+    "#120e1c",
+    "#ecba94",
+    "#c48c6c",
+    "#563020",
+    "#965834",
+    "#346cc4",
+    "#204494",
+    "#76aae6",
+    "#bc2c3a",
+    "#841c2c",
+    "#343c5c",
+    "#562e20",
+    "#804a2e",
+    "#d6e2ec",
+    "#9aaec4",
+    "#5a6c84",
+    "#fed648",
+    "#e89c28",
+    "#c4601c",
+    "#fff4b4",
+    "#ffffff"
+  ],
+  "grid": {
+    "width": 16,
+    "height": 16
+  },
+  "pivot": {
+    "x": 22,
+    "y": 48
+  },
+  "sources": {
+    "dir": "raw",
+    "cleanDir": "clean",
+    "pattern": "{tag}_{frame:02d}.png",
+    "cornerKey": false,
+    "keyColors": [],
+    "tolerance": 28,
+    "anchor": "bottom-center",
+    "padding": 1,
+    "scaleMode": "none"
+  },
+  "layers": [
+    {
+      "name": "sprite"
+    }
+  ],
+  "tags": [
+    {
+      "name": "idle",
+      "frames": 4,
+      "duration": 140
+    },
+    {
+      "name": "attack",
+      "frames": 6,
+      "duration": 70
+    }
+  ]
+}

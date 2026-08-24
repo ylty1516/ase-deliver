@@ -14,6 +14,7 @@ from .demo_art import (
     spark_frames,
     sword_frame,
 )
+from .hero_art import HERO_PALETTE, hero_attack, hero_idle
 from .spec import format_cel_name, raw_dir, save_spec, sources_cfg
 from .templates import get_template
 from .util import dump_json, ensure_dir
@@ -118,4 +119,46 @@ def seed_props_project(root: Path, name: str = "props") -> dict[str, Any]:
         "spark": spark_frames(),
     }
     files = _write_canvases(root, spec, sequences)
+    return {"spec": spec, "files": files}
+
+
+def make_hero_spec(name: str = "hero") -> dict[str, Any]:
+    spec = get_template("character-platformer")
+    spec["name"] = name
+    spec["kind"] = "character"
+    spec["view"] = "side"
+    spec["description"] = "side-view chibi hero in a blue tunic, brown hair, red cape, longsword, facing right"
+    spec["canvas"] = {"width": 48, "height": 48}
+    spec["colorMode"] = "indexed"
+    spec["palette"] = HERO_PALETTE
+    spec["grid"] = {"width": 16, "height": 16}
+    spec["pivot"] = {"x": 22, "y": 48}
+    spec["tags"] = [
+        {"name": "idle", "frames": 4, "duration": 140},
+        {"name": "attack", "frames": 6, "duration": 70},
+    ]
+    spec["layers"] = [{"name": "sprite"}]
+    spec["sources"]["anchor"] = "bottom-center"
+    spec["sources"]["padding"] = 1
+    spec["sources"]["scaleMode"] = "none"
+    spec["sources"]["cornerKey"] = False
+    spec["sources"]["keyColors"] = []
+    return spec
+
+
+def seed_hero_project(root: Path, name: str = "hero") -> dict[str, Any]:
+    spec = make_hero_spec(name)
+    ensure_dir(root)
+    save_spec(root, spec)
+    ensure_dir(root / "raw")
+    ensure_dir(root / "clean")
+    ensure_dir(root / "out")
+    files = _write_canvases(
+        root,
+        spec,
+        {
+            "idle": hero_idle(),
+            "attack": hero_attack(),
+        },
+    )
     return {"spec": spec, "files": files}
