@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ase-deliver"
+version = "1.0.0"
+description = "Any-AI compiler for production-ready Aseprite game art"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pillow>=10.0.0"]
+
+[project.scripts]
+ase-deliver = "ase_deliver.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ase_deliver*"]

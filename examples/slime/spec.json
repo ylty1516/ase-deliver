@@ -1,0 +1,52 @@
+{
+  "schema": "ase-deliver/v1",
+  "name": "slime",
+  "kind": "character",
+  "view": "side",
+  "description": "a round green slime with two big eyes, no legs, facing right",
+  "canvas": {
+    "width": 16,
+    "height": 16
+  },
+  "colorMode": "indexed",
+  "palette": "endesga-32",
+  "grid": {
+    "width": 16,
+    "height": 16
+  },
+  "pivot": {
+    "x": 8,
+    "y": 16
+  },
+  "sources": {
+    "dir": "raw",
+    "cleanDir": "clean",
+    "pattern": "{tag}_{frame:02d}.png",
+    "cornerKey": true,
+    "keyColors": [
+      "#FF00FF",
+      "#00FF00"
+    ],
+    "tolerance": 28,
+    "anchor": "bottom-center",
+    "padding": 1,
+    "scaleMode": "contain"
+  },
+  "layers": [
+    {
+      "name": "sprite"
+    }
+  ],
+  "tags": [
+    {
+      "name": "idle",
+      "frames": 4,
+      "duration": 140
+    },
+    {
+      "name": "walk",
+      "frames": 4,
+      "duration": 90
+    }
+  ]
+}

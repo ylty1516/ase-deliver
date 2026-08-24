@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ase-deliver/v1",
+  "title": "AseDeliver spec",
+  "type": "object",
+  "required": ["schema", "name", "canvas"],
+  "properties": {
+    "schema": { "const": "ase-deliver/v1" },
+    "name": { "type": "string" },
+    "kind": {
+      "enum": ["character", "prop", "tileset", "ui", "fx", "portrait", "concept"]
+    },
+    "view": { "type": "string" },
+    "description": { "type": "string" },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1, "maximum": 4096 },
+        "height": { "type": "integer", "minimum": 1, "maximum": 4096 }
+      }
+    },
+    "colorMode": { "enum": ["indexed", "rgba"] },
+    "palette": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "tags": { "type": "array" },
+    "frames": { "type": "array" },
+    "layers": { "type": "array" },
+    "sources": { "type": "object" },
+    "slices": { "type": "array" },
+    "sheet": { "type": "object" }
+  }
+}

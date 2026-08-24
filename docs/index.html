@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AseDeliver — 任意 AI 都能交付的 Aseprite 游戏原画</title>
+  <meta name="description" content="AseDeliver 把任意 AI 生成的像素图编译成可打开、可进游戏的 .aseprite：图层、帧、Tag、调色板、精灵表和 JSON。">
+  <meta property="og:title" content="AseDeliver">
+  <meta property="og:description" content="Any AI → production Aseprite game art.">
+  <meta property="og:image" content="./assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="./">
+        <img src="./assets/favicon.png" alt="">
+        AseDeliver
+      </a>
+      <div class="nav-links">
+        <a href="#gallery">展示</a>
+        <a href="#how">流程</a>
+        <a href="#install">安装</a>
+        <a href="https://github.com/ylty1516/ase-deliver">GitHub</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <img class="cover" src="./assets/hero.png" alt="AseDeliver hero: pixel night forest and a green slime sprite">
+      <div class="hero-copy">
+        <p class="kicker">CLI · MCP · Aseprite 1.3</p>
+        <h1>任意 AI，交得出的像素原画</h1>
+        <p>不是一张带背景的 PNG。AseDeliver 把规格和像素编译成真正的 <code>.aseprite</code>：图层、帧、Tag、调色板，再导出精灵表、GIF 和引擎 JSON。</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="https://github.com/ylty1516/ase-deliver">Star on GitHub</a>
+          <a class="btn btn-ghost" href="#install">30 秒跑通 demo</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="gallery">
+      <h2>真实输出，不是概念图</h2>
+      <p class="lead">下面全部来自仓库里的 <code>examples/slime</code>。官方 Aseprite 1.3.18.2 已验证能打开。</p>
+      <div class="gallery">
+        <figure class="card">
+          <img src="./assets/slime-sheet.png" alt="16x16 slime sprite sheet with idle and walk tags">
+          <figcaption>
+            <strong>slime.aseprite · idle + walk</strong>
+            16×16 索引色，8 帧，Tag 已经打好。这就是游戏该吃的源文件。
+          </figcaption>
+        </figure>
+        <div class="stack">
+          <figure class="card">
+            <div class="gif-frame">
+              <img src="./assets/slime-idle.gif" alt="Slime idle animation">
+            </div>
+            <figcaption><strong>idle</strong> 呼吸循环 · 140ms</figcaption>
+          </figure>
+          <figure class="card">
+            <div class="gif-frame">
+              <img src="./assets/slime-walk.gif" alt="Slime walk animation">
+            </div>
+            <figcaption><strong>walk</strong> 原地走动 · 90ms</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>在 Aseprite 里长这样</h2>
+      <p class="lead">图层、调色板、Tag、时间轴一次写好。AI 不再只丢一张图给你。</p>
+      <figure class="card mock">
+        <img src="./assets/aseprite-mock.png" alt="Aseprite-style editor mock showing slime, palette, tags and timeline">
+        <figcaption class="caption">时间轴上的 idle / walk 来自真实文件头，不是手绘假界面。</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="how">
+      <h2>四步交货</h2>
+      <p class="lead">任何会写文件或调 MCP 的模型都能跟这套合同走。图像模型可换，交付物不变。</p>
+      <img class="wide" src="./assets/pipeline.png" alt="Spec, pixels, compile, deliver pipeline">
+      <div class="grid-3" style="margin-top:22px">
+        <article class="mini">
+          <div class="tag">Any AI</div>
+          <h3>Claude / Cursor / Grok / Codex</h3>
+          <p>读 <code>AGENTS.md</code>，或接 MCP。按 brief 的文件名把图画进 <code>raw/</code>。</p>
+        </article>
+        <article class="mini">
+          <div class="tag">No image model?</div>
+          <h3>ASCII 也能画</h3>
+          <p>文本模型用像素地图 <code>paint</code>。史莱姆示例就是纯 ASCII 编出来的。</p>
+        </article>
+        <article class="mini">
+          <div class="tag">Engine ready</div>
+          <h3>Godot / Phaser / Unity</h3>
+          <p>导出 sheet + Aseprite JSON（frames + frameTags）。源文件始终是 <code>.aseprite</code>。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>道具也一样交</h2>
+      <p class="lead">同一套调色板、同一套透明规则。角色、道具、特效共用流水线。</p>
+      <figure class="card">
+        <img src="./assets/props.png" alt="Potion, coin, chest and sword pixel props">
+        <figcaption>potion · coin · chest · sword — 16×16，透明底，索引色。</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <h2>模板</h2>
+      <div class="templates">
+        <div class="tpl"><b>character-platformer</b><span>32×32 idle / walk / jump</span></div>
+        <div class="tpl"><b>character-topdown</b><span>16×16 四向走</span></div>
+        <div class="tpl"><b>character-turnaround</b><span>64×64 原画四视图</span></div>
+        <div class="tpl"><b>portrait</b><span>80×80 bust</span></div>
+        <div class="tpl"><b>prop</b><span>32×32 道具 idle</span></div>
+        <div class="tpl"><b>tileset-16</b><span>16px 地砖</span></div>
+        <div class="tpl"><b>ui-button</b><span>按钮三态 + 9-slice</span></div>
+        <div class="tpl"><b>fx</b><span>32×32 特效爆发</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <h2>安装并打开史莱姆</h2>
+      <p class="lead">需要 Python 3.10+。Aseprite 不是编译所必需，但 <code>open</code> 需要它。</p>
+<pre>git clone https://github.com/ylty1516/ase-deliver.git
+cd ase-deliver
+py -3 -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+ase-deliver.bat demo --out examples\slime --open</pre>
+    </section>
+
+    <footer>
+      <span>MIT · made for Aseprite, Godot, Phaser, Unity</span>
+      <span><a href="https://github.com/ylty1516/ase-deliver">github.com/ylty1516/ase-deliver</a></span>
+    </footer>
+  </div>
+</body>
+</html>
