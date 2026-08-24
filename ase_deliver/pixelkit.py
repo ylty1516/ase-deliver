@@ -59,6 +59,14 @@ class Canvas:
     def disc(self, cx: float, cy: float, r: float, color: RGB) -> None:
         self.ellipse(cx, cy, r, r, color)
 
+    def stroke(self, x0: float, y0: float, x1: float, y1: float, radius: float, color: RGB) -> None:
+        dx = x1 - x0
+        dy = y1 - y0
+        steps = int(max(abs(dx), abs(dy)) * 3) + 1
+        for i in range(steps + 1):
+            t = i / steps
+            self.disc(x0 + dx * t, y0 + dy * t, radius, color)
+
     def shade_body(self, mask: Iterable[tuple[int, int]], cx: float, cy: float, rx: float, ry: float, dark: RGB, mid: RGB, body: RGB, hi: RGB) -> None:
         for x, y in mask:
             nx = (x + 0.5 - cx) / max(rx, 0.01)
