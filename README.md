@@ -21,16 +21,18 @@
 
 ## 展示
 
-史莱姆示例是工具自己编的（ASCII 像素 → 索引色 `.aseprite`），已用官方 **Aseprite 1.3.18.2** 打开验证。
+史莱姆示例是工具自己画的 32×32 成品（描边、四档明暗、idle / walk / jump），已用官方 **Aseprite 1.3.18.2** 打开验证。
 
 <p align="center">
   <img src="docs/assets/slime-sheet.png" alt="slime idle and walk sprite sheet" width="100%">
 </p>
 
 <p align="center">
-  <img src="docs/assets/slime-idle.gif" alt="slime idle" height="220">
+  <img src="docs/assets/slime-idle.gif" alt="slime idle" height="200">
   &nbsp;&nbsp;
-  <img src="docs/assets/slime-walk.gif" alt="slime walk" height="220">
+  <img src="docs/assets/slime-walk.gif" alt="slime walk" height="200">
+  &nbsp;&nbsp;
+  <img src="docs/assets/slime-jump.gif" alt="slime jump" height="200">
 </p>
 
 <p align="center">

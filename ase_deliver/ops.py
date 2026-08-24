@@ -6,7 +6,7 @@ from typing import Any
 
 from .brief import generation_brief
 from .compile import compile_project, ingest_project
-from .demo import seed_demo_project
+from .demo import seed_demo_project, seed_props_project
 from .doctor import doctor, find_aseprite
 from .export import export_project
 from .images import rasterize_pixels
@@ -123,14 +123,20 @@ def demo_project(dest: str | Path, open_file: bool = False) -> dict[str, Any]:
     dest = Path(dest)
     seeded = seed_demo_project(dest, name="slime")
     built = build_project(dest)
+    props_dir = dest.parent / "props"
+    props = seed_props_project(props_dir)
+    props_built = build_project(props_dir)
     opened = None
     if open_file:
         opened = open_in_aseprite(dest)
     return {
-        "ok": built.get("ok"),
+        "ok": bool(built.get("ok") and props_built.get("ok")),
         "project": str(dest.resolve()),
+        "propsProject": str(props_dir.resolve()),
         "seededFiles": seeded["files"],
+        "propsFiles": props["files"],
         "build": built,
+        "propsBuild": props_built,
         "opened": opened,
     }
 

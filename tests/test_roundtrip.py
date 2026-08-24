@@ -19,11 +19,13 @@ from ase_deliver.spec import expand_spec
 
 
 class RoundTripTests(unittest.TestCase):
-    def test_demo_frames_are_16x16(self) -> None:
+    def test_demo_frames_are_32x32(self) -> None:
         spec = make_demo_spec()
         expanded = expand_spec(spec)
-        self.assertEqual(expanded["canvas"]["width"], 16)
-        self.assertEqual(len(expanded["frames"]), 8)
+        self.assertEqual(expanded["canvas"]["width"], 32)
+        self.assertEqual(expanded["canvas"]["height"], 32)
+        self.assertEqual(len(expanded["frames"]), 16)
+        self.assertEqual([t["name"] for t in expanded["tags"]], ["idle", "walk", "jump"])
 
     def test_build_demo_and_read_aseprite(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -34,11 +36,11 @@ class RoundTripTests(unittest.TestCase):
             ase = dest / "out" / "slime.aseprite"
             self.assertTrue(ase.is_file())
             info = read_ase_info(ase)
-            self.assertEqual(info.width, 16)
-            self.assertEqual(info.height, 16)
-            self.assertEqual(info.frames, 8)
+            self.assertEqual(info.width, 32)
+            self.assertEqual(info.height, 32)
+            self.assertEqual(info.frames, 16)
             self.assertEqual(info.layers, ["sprite"])
-            self.assertEqual(info.tags, ["idle", "walk"])
+            self.assertEqual(info.tags, ["idle", "walk", "jump"])
             self.assertEqual(info.depth, 8)
             self.assertTrue((dest / "out" / "slime.png").is_file())
             self.assertTrue((dest / "out" / "slime.gif").is_file())
@@ -64,24 +66,10 @@ class RoundTripTests(unittest.TestCase):
             seed_demo_project(dest, name="dot")
             payload = {
                 "map": {".": None, "#": "#ffffff"},
-                "rows": [
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    ".......##.......",
-                    ".......##.......",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                    "................",
-                ],
+                "rows": ["." * 32 for _ in range(15)]
+                + ["." * 15 + "##" + "." * 15]
+                + ["." * 15 + "##" + "." * 15]
+                + ["." * 32 for _ in range(15)],
             }
             painted = paint_cel(dest, payload, tag="idle", frame=0)
             self.assertTrue(painted["ok"])

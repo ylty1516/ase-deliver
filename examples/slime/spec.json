@@ -3,34 +3,58 @@
   "name": "slime",
   "kind": "character",
   "view": "side",
-  "description": "a round green slime with two big eyes, no legs, facing right",
+  "description": "a glossy round green slime with big shiny eyes, facing right, 32x32 game sprite",
   "canvas": {
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "colorMode": "indexed",
-  "palette": "endesga-32",
+  "palette": [
+    "#141020",
+    "#1f4a35",
+    "#368043",
+    "#5cc44a",
+    "#b0e87c",
+    "#ffffff",
+    "#120e1c",
+    "#f07680",
+    "#c43040",
+    "#b0d6e4",
+    "#5a7a96",
+    "#d43440",
+    "#942030",
+    "#f6828a",
+    "#b06040",
+    "#703828",
+    "#fed648",
+    "#e89c28",
+    "#c4601c",
+    "#b06840",
+    "#6e362c",
+    "#dca870",
+    "#c0cbdc",
+    "#5a6988",
+    "#d6e2ec",
+    "#7688a0"
+  ],
   "grid": {
     "width": 16,
     "height": 16
   },
   "pivot": {
-    "x": 8,
-    "y": 16
+    "x": 16,
+    "y": 32
   },
   "sources": {
     "dir": "raw",
     "cleanDir": "clean",
     "pattern": "{tag}_{frame:02d}.png",
-    "cornerKey": true,
-    "keyColors": [
-      "#FF00FF",
-      "#00FF00"
-    ],
+    "cornerKey": false,
+    "keyColors": [],
     "tolerance": 28,
     "anchor": "bottom-center",
     "padding": 1,
-    "scaleMode": "contain"
+    "scaleMode": "none"
   },
   "layers": [
     {
@@ -40,11 +64,16 @@
   "tags": [
     {
       "name": "idle",
-      "frames": 4,
-      "duration": 140
+      "frames": 6,
+      "duration": 120
     },
     {
       "name": "walk",
+      "frames": 6,
+      "duration": 80
+    },
+    {
+      "name": "jump",
       "frames": 4,
       "duration": 90
     }
